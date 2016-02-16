@@ -1,7 +1,16 @@
-# Official Redactor II WYSIWYG Plugins
-This repo contains latest versions of the official Redactor II WYSIWYG Plugins.
+# Official [Redactor II WYSIWYG](https://imperavi.com/redactor) Plugins
 
-Here's the latest list of official Redactor II plugins:
+Redactor II is advanced, clean and smooth Rich Text Editor. It offers an excellent immersive user experience. Small and robust, Redactor is favorite choice for thousands of professional developers worldwide.
+
+Redactor offers well-documented, [powerful and flexible API](https://imperavi.com/redactor/docs/api/), which extends and enhances user experinece and allows developers to do wonderful things with Redactor. 
+
+![Redactor Demo](https://dl.dropboxusercontent.com/u/127064/Plugin_Demo.png)
+
+This repo contains latest versions of the official [Redactor II WYSIWYG](https://imperavi.com/redactor) Plugins. 
+
+NB. You may need to [purchase a licence](https://imperavi.com/redactor/buy) for Redactor to use these plugins (they won't work without Redactor itself).
+
+Here's the latest list of official Redactor II plugins with short descriptions.
 
 ## Inline Style 
 Apply inline formatting to style text using "Style" dropdown.
@@ -10,7 +19,7 @@ Apply inline formatting to style text using "Style" dropdown.
 This plugin allows users to look through and edit text's HTML source code. Developers may extend and enhance this plugin to bring even more HTML-related source code features to the users.
 
 ## Codemirror 
-This plugin enables source code highlighting, powered by CodeMirror. For all available settings and commands, please refer to CodeMirror User Manual.
+This plugin enables source code highlighting, powered by [CodeMirror](http://codemirror.net). For all available settings and commands, please refer to CodeMirror User Manual.
 
 ## Text Alignment 
 Align text left, center or right
@@ -37,8 +46,8 @@ This plugin allows you to assign any id or class to any block tag (selected or c
 ## Predefined Links 
 Allow users to select predefined links from a list.
 
-## Uploadcare 
-Upload media from multiple cloud sources and social networks, and manage files with uploadcare.com plugin. No backend required
+## [Uploadcare](https://github.com/uploadcare/uploadcare-redactor/) 
+Upload media from multiple cloud sources and social networks, and manage files with [Uploadcare.com](http://uploadcare.com) plugin. No backend required
 
 ## Clips 
 Create a dropdown of frequently used "snippets" of code, text, icons, emoji, you name it.
