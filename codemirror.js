@@ -123,7 +123,7 @@
 				this.button.enableAll();
 				this.core.editor().show().focus();
 				this.selection.restore();
-				this.code.sync();
+				//this.code.sync();
 
 			},
 			show: function()
