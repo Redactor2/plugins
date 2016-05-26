@@ -207,8 +207,7 @@
 				this.buffer.set();
 
 				var current = this.selection.current();
-				var $closestLi = $(current).closest('li');
-				if ($closestLi.length !== 0 && this.$editor.has($closestLi).length !== 0)
+				if ($(current).closest('li', this.core.editor().get(0)).length !== 0)
 				{
 					$(current).closest('ul, ol').first().after(html);
 				}
