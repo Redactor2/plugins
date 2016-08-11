@@ -113,7 +113,8 @@
 
 				var code = this.source.$textarea.val();
 
-				code = this.paragraphize.load(code);
+				// Disable to workaround bug in paragraphize, which will keep adding <p> wrapper for some top level element such as <a>
+				// code = this.paragraphize.load(code);
 				code = this.source.setCaretOnHide(code);
 
 				this.code.start(code);
