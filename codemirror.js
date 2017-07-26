@@ -6,6 +6,7 @@
 			init: function()
 			{
 				var button = this.button.addFirst('html', 'HTML');
+				this.button.setIcon(button, '<i class="re-icon-html"></i>');
 				this.button.addCallback(button, this.codemirror.toggle);
 
 				this.codemirror.$textarea = $('<textarea />');
@@ -34,7 +35,25 @@
 			},
 			toggle: function()
 			{
-				return (this.codemirror.$textarea.hasClass('open')) ? this.codemirror.hide() : this.codemirror.show();
+				if (this.codemirror.$textarea.hasClass('open'))
+				{
+    				this.codemirror.hide();
+                }
+                else
+                {
+                    this.codemirror.show();
+                    this.codemirror.$textarea.next('.CodeMirror').on('keyup.redactor-codemirror', $.proxy(function()
+                    {
+                        var html = '';
+        				this.codemirror.$textarea.next('.CodeMirror').each(function(i, el)
+        				{
+        					html = el.CodeMirror.getValue();
+        				});
+
+                        this.core.callback('change', html);
+
+                    }, this));
+                }
 			},
 			setCaretOnShow: function()
 			{
@@ -98,7 +117,7 @@
 				this.codemirror.start = this.codemirror.enlargeOffset(html, this.codemirror.start);
 				this.codemirror.end = this.codemirror.enlargeOffset(html, this.codemirror.end);
 
-				html = html.substr(0, this.codemirror.start) + this.marker.html(1) + html.substr(this.codemirror.start);
+				html = html.substr(0, this.codemirror.start) + this.marker.html(1)  + html.substr(this.codemirror.start);
 
 				if (this.codemirror.end > this.codemirror.start)
 				{
@@ -118,24 +137,26 @@
 
 				code = this.codemirror.setCaretOnHide(code);
 				code = this.paragraphize.load(code);
+                code = code.replace('&amp;<span id="selection-marker-1" class="redactor-selection-marker">​</span>', '<span id="selection-marker-1" class="redactor-selection-marker">​</span>&amp;');
 
 				this.code.start(code);
 				this.button.enableAll();
 				this.core.editor().show().focus();
 				this.selection.restore();
-				//this.code.sync();
+				this.placeholder.enable();
 
+                this.core.callback('visual');
 			},
 			show: function()
 			{
 				this.selection.save();
 				this.codemirror.setCaretOnShow();
 
-				var height = this.core.editor().innerHeight();
+				var height = this.core.editor().height();
 				var code = this.code.get();
 
-				code = code.replace(/\n\n\n/g, "\n");
-				code = code.replace(/\n\n/g, "\n");
+                // callback
+                code = this.core.callback('source', code);
 
 				this.core.editor().hide();
 				this.button.disableAll('html');

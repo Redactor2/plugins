@@ -56,6 +56,7 @@
 
 
 				var button = this.button.addAfter('format', 'inline', this.lang.get('style'));
+				this.button.setIcon(button, '<i class="re-icon-inline"></i>');
 				this.button.addDropdown(button, dropdown);
 
 			}

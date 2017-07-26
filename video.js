@@ -28,6 +28,7 @@
 			init: function()
 			{
 				var button = this.button.addAfter('image', 'video', this.lang.get('video'));
+				this.button.setIcon(button, '<i class="re-icon-video"></i>');
 				this.button.addCallback(button, this.video.show);
 			},
 			show: function()
@@ -55,10 +56,17 @@
 			insert: function()
 			{
 				var data = $('#redactor-insert-video-area').val();
+				var matches = data.match(/<iframe|<video/gi);
 
-				if (!data.match(/<iframe|<video/gi))
+				if (matches && matches.length !== 0)
 				{
-					data = this.clean.stripTags(data);
+					var allowed = ['iframe', 'video'];
+					var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+
+				    data = data.replace(tags, function ($0, $1)
+				    {
+				        return (allowed.indexOf($1.toLowerCase()) === -1) ? '' : $0;
+				    });
 
 					this.opts.videoContainerClass = (typeof this.opts.videoContainerClass === 'undefined') ? 'video-container' : this.opts.videoContainerClass;
 
@@ -73,6 +81,10 @@
 					else if (data.match(this.video.reUrlVimeo))
 					{
 						data = data.replace(this.video.reUrlVimeo, iframeStart + '//player.vimeo.com/video/$2' + iframeEnd);
+					}
+					else
+					{
+    					data = '<div class="' + this.opts.videoContainerClass + '">' + data + '</div>';
 					}
 				}
 

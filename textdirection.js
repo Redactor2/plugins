@@ -19,6 +19,7 @@
 				dropdown.rtl = { title: that.lang.get('right-to-left'), func: that.textdirection.setRtl };
 
 				var button = this.button.add('textdirection', this.lang.get('change-text-direction'));
+				this.button.setIcon(button, '<i class="re-icon-textdirection"></i>');
 				this.button.addDropdown(button, dropdown);
 			},
 			setRtl: function()

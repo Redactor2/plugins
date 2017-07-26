@@ -6,19 +6,20 @@
 			init: function()
 			{
 				var button = this.button.addFirst('html', 'HTML');
+				this.button.setIcon(button, '<i class="re-icon-html"></i>');
 				this.button.addCallback(button, this.source.toggle);
 
 				var style = {
 					'width': '100%',
 					'margin': '0',
-					'background': '#111',
+					'background': '#1d1d1d',
 					'box-sizing': 'border-box',
-					'color': 'rgba(255, 255, 255, .8)',
-					'font-size': '14px',
+					'color': '#ccc',
+					'font-size': '15px',
 					'outline': 'none',
-					'padding': '16px',
-					'line-height': '22px',
-					'font-family': 'Menlo, Monaco, Consolas, "Courier New", monospace'
+					'padding': '20px',
+					'line-height': '24px',
+					'font-family': 'Consolas, Menlo, Monaco, "Courier New", monospace'
 				};
 
 				this.source.$textarea = $('<textarea />');
@@ -42,7 +43,20 @@
 			},
 			toggle: function()
 			{
-				return (this.source.$textarea.hasClass('open')) ? this.source.hide() : this.source.show();
+				if (this.source.$textarea.hasClass('open'))
+				{
+    				this.source.hide();
+                }
+                else
+                {
+                    this.source.show();
+                    this.source.$textarea.on('keyup.redactor-source', $.proxy(function()
+                    {
+                        var html = this.source.$textarea.val();
+                        this.core.callback('change', html);
+
+                    }, this));
+                }
 			},
 			setCaretOnShow: function()
 			{
@@ -73,7 +87,6 @@
 						this.source.end = this.utils.strpos(editorHtml, $editorDiv.find("#selection-marker-2").prop("outerHTML")) - $editorDiv.find("#selection-marker-1").prop("outerHTML").toString().length;
 					}
 				}
-
 			},
 			setCaretOnHide: function(html)
 			{
@@ -115,26 +128,30 @@
 
 				code = this.paragraphize.load(code);
 				code = this.source.setCaretOnHide(code);
+				code = code.replace('&amp;<span id="selection-marker-1" class="redactor-selection-marker">​</span>', '<span id="selection-marker-1" class="redactor-selection-marker">​</span>&amp;');
 
 				this.code.start(code);
 				this.button.enableAll();
 				this.core.editor().show().focus();
 				this.selection.restore();
-				//this.code.sync();
+				this.placeholder.enable();
+
+                this.core.callback('visual');
 			},
 			show: function()
 			{
 				this.selection.save();
 				this.source.setCaretOnShow();
 
-				var height = this.core.editor().innerHeight();
+				var height = this.core.editor().height();
 				var code = this.code.get();
 
-				code = code.replace(/\n\n\n/g, "\n");
-				code = code.replace(/\n\n/g, "\n");
+                // callback
+                code = this.core.callback('source', code);
 
 				this.core.editor().hide();
 				this.button.disableAll('html');
+
 				this.source.$textarea.val(code).height(height).addClass('open').show();
 				this.source.$textarea.on('keyup.redactor-source', $.proxy(function()
 				{
