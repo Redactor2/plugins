@@ -2,5 +2,9 @@
   "name": "redactor-plugins",
   "version": "1.0.0",
   "description": "Redactor II is advanced, clean and smooth Rich Text Editor. It offers an excellent immersive user experience. Small and robust, Redactor is favorite choice for thousands of professional developers worldwide.",
-  "main": ""
+  "main": "",
+  "homepage": "https://github.com/amineo/plugins",
+  "repository": {
+    "url": "git://github.com/amineo/plugins.git"
+  }
 }
