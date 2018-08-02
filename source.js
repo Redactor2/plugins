@@ -22,11 +22,6 @@
 				};
 
 				this.source.$textarea = $('<textarea />');
-				// This line here is a fix so that we can use ng-model binding for the code view
-				// for the redactor class. It basically grabs the original textarea field and binds
-				// it to the text area of the code view in the redactor so that the ng-model bind will
-				// be bound to the code view as well as the rich content editor view.
-				this.source.$textarea[0] = this.core.box()[0].childNodes[3];
 				this.source.$textarea.css(style).hide();
 
 				if (this.opts.type === 'textarea')
